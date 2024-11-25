@@ -266,7 +266,9 @@ def main():
                 return
 
             image = image.convert('RGB')
-            st.image(image, caption="Загруженное изображение", use_column_width=True)
+            # Отображение загруженного изображения
+            st.image(image, caption="Загруженное изображение", use_container_width=True)
+
 
             # Выбор индекса для расчета
             st.subheader("Выберите спектральный индекс для расчета")
