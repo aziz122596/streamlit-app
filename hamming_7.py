@@ -89,7 +89,7 @@ if uploaded_file is not None:
         st.pyplot(plt)
         plt.clf()
 
-        # Анализ и расчет показателей (оставляем без изменений)
+        # Анализ и расчет показателей
         sample_names = data_for_markers.index.tolist()
 
         def extract_group_name(sample_name):
@@ -190,12 +190,12 @@ if uploaded_file is not None:
             pdf.add_page()
             pdf.set_font('DejaVu', '', 16)
             pdf.cell(0, 10, 'Матрица расхождения Хэмминга', 0, 1, 'C')
-            pdf.image(heatmap_buffer, x=10, y=20, w=pdf.w - 20)
+            pdf.image(heatmap_buffer, x=10, y=20, w=pdf.epw, type='PNG')
 
             pdf.add_page()
             pdf.set_font('DejaVu', '', 16)
             pdf.cell(0, 10, 'Дендрограмма кластеризации маркеров', 0, 1, 'C')
-            pdf.image(dendrogram_buffer, x=10, y=20, w=pdf.w - 20)
+            pdf.image(dendrogram_buffer, x=10, y=20, w=pdf.epw, type='PNG')
 
             # Сохраняем PDF в буфер
             pdf_buffer = io.BytesIO()
