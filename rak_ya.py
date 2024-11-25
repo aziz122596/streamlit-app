@@ -61,7 +61,7 @@ def load_model():
     hidden_size = 16
     output_size = 2  # Два класса: 0 - отсутствует, 1 - присутствует
     model = OvarianCancerModel(input_size, hidden_size, output_size)
-    model.load_state_dict(torch.load('ovarian_cancer_model.pth', map_location=torch.device('cpu')))
+    model.load_state_dict(torch.load('C:\Users\User\Desktop\Biochem\streamlit\vae_model.pth', map_location=torch.device('cpu')))
     model.eval()
     return model
 
