@@ -14,7 +14,7 @@ def set_css():
     st.markdown("""
         <style>
         .stApp {
-            background-image: url(https://i.pinimg.com/736x/b1/73/aa/b173aafcd21c285a60cdff9ff39cb0d8.jpg);
+            background-image: url(https://avatars.mds.yandex.net/i?id=f2827e1402f59dce99ca27d739c9397d_l-4755642-images-thumbs&n=13.jpg);
             background-size: cover;
         }
         </style>
@@ -81,7 +81,14 @@ Sample9;1;1;1;0;0;0;1;0
         st.write("Первые пять строк данных" if language == "Русский" else "First five rows of data")
         st.dataframe(data.head())
 
-        data = data.set_index('Sample')  # Устанавливаем колонку 'Sample' как индекс
+        # Проверяем, есть ли в данных колонка 'Sample'
+        if 'Sample' in data.columns:
+            data = data.set_index('Sample')  # Устанавливаем колонку 'Sample' как индекс
+        else:
+            # Автоматически присваиваем имена образцам
+            sample_names = [f"Sample{i+1}" for i in range(len(data))]
+            data.index = sample_names
+
         data = data.apply(pd.to_numeric, errors='coerce')
         if data.empty:
             st.error("Загруженные данные пусты. Пожалуйста, загрузите корректный файл." if language == "Русский" else "Uploaded data is empty. Please upload a valid file.")
@@ -146,7 +153,13 @@ Sample9;1;1;1;0;0;0;1;0
             sample_names = data_for_markers.index.tolist()
 
             def extract_group_name(sample_name):
-                return '_'.join(sample_name.split('_')[:-1])
+                # Если имена содержат разделители, извлекаем группу
+                if '_' in sample_name:
+                    return '_'.join(sample_name.split('_')[:-1])
+                elif '-' in sample_name:
+                    return '-'.join(sample_name.split('-')[:-1])
+                else:
+                    return 'Group1'  # Если разделителей нет, присваиваем одну группу
 
             sample_groups = {}
             for idx, name in enumerate(sample_names):
@@ -320,3 +333,4 @@ elif selected == "Контакты" or selected == "Contacts":
         - Email: az.abdurakhimov@gmail.com
         - Phone: +998 (33) 519-06-09
         """)
+
