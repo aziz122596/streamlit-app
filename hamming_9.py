@@ -14,7 +14,7 @@ def set_css():
     st.markdown("""
         <style>
         .stApp {
-            background-image: url(https://bogatyr.club/uploads/posts/2024-03/1711079177_bogatyr-club-p-oboi-khaki-91.jpg);
+            background-image: url(https://i.pinimg.com/736x/b1/73/aa/b173aafcd21c285a60cdff9ff39cb0d8.jpg);
             background-size: cover;
         }
         </style>
@@ -51,10 +51,16 @@ def main_page():
         st.markdown("You can download a sample file for example:")
 
     # Создаем образец данных
-    sample_data = '''Sample-1;0;1;1;0
-Sample-2;1;0;1;1
-Sample-3;0;1;0;1
-Sample-4;1;1;0;0
+    sample_data = '''Sample;Sample_1;Sample_2;Sample_3;Sample_4;Sample_5;Sample_6;Sample_7;Sample_8
+Sample1;0;0;0;0;0;1;1;0
+Sample2;1;0;0;1;0;0;1;1
+Sample3;0;1;1;0;1;1;0;0
+Sample4;1;0;1;0;1;0;1;1
+Sample5;0;0;0;1;0;0;0;0
+Sample6;0;1;0;0;0;1;0;0
+Sample7;1;1;1;0;0;0;1;1
+Sample8;0;0;0;1;1;1;0;0
+Sample9;1;1;1;0;0;0;1;0
 '''
 
     st.download_button(
@@ -75,6 +81,7 @@ Sample-4;1;1;0;0
         st.write("Первые пять строк данных" if language == "Русский" else "First five rows of data")
         st.dataframe(data.head())
 
+        data = data.set_index('Sample')  # Устанавливаем колонку 'Sample' как индекс
         data = data.apply(pd.to_numeric, errors='coerce')
         if data.empty:
             st.error("Загруженные данные пусты. Пожалуйста, загрузите корректный файл." if language == "Русский" else "Uploaded data is empty. Please upload a valid file.")
@@ -139,7 +146,7 @@ Sample-4;1;1;0;0
             sample_names = data_for_markers.index.tolist()
 
             def extract_group_name(sample_name):
-                return '-'.join(sample_name.split('-')[:-1])
+                return '_'.join(sample_name.split('_')[:-1])
 
             sample_groups = {}
             for idx, name in enumerate(sample_names):
@@ -304,12 +311,12 @@ elif selected == "Контакты" or selected == "Contacts":
     if language == "Русский":
         st.write("""
         Если у вас есть вопросы или предложения, пожалуйста, свяжитесь с нами:
-        - Email: example@example.com
-        - Телефон: +7 (123) 456-78-90
+        - Email: az.abdurakhimov@gmail.com
+        - Телефон: +998 (33) 519-06-09
         """)
     else:
         st.write("""
         If you have any questions or suggestions, please contact us:
-        - Email: example@example.com
-        - Phone: +1 (123) 456-7890
+        - Email: az.abdurakhimov@gmail.com
+        - Phone: +998 (33) 519-06-09
         """)
