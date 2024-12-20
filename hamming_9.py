@@ -16,6 +16,10 @@ def set_css():
         .stApp {
             background-image: url(https://avatars.mds.yandex.net/i?id=f2827e1402f59dce99ca27d739c9397d_l-4755642-images-thumbs&n=13.jpg);
             background-size: cover;
+            color: white; /* Устанавливает белый текст */
+        }
+        .stMarkdown {
+            color: white !important; /* Применяет белый текст к markdown */
         }
         </style>
         """, unsafe_allow_html=True)
